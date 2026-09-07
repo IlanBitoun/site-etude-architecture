@@ -1,0 +1,655 @@
+/* ==========================================================================
+   ÉTUDE Architecture — feuille de style principale
+   Fond travertin R234 V229 B228 · texte noir · Brut Grotesque
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@font-face{
+  font-family:'IB Hand';
+  src:url('../fonts/IB_HAND-Regular.otf') format('opentype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Brut Grotesque';
+  src:url('../fonts/Brut_Grotesque-Light.woff2') format('woff2');
+  font-weight:300;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Brut Grotesque';
+  src:url('../fonts/Brut_Grotesque-Italic.woff2') format('woff2');
+  font-weight:300 400;
+  font-style:italic;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Brut Grotesque';
+  src:url('../fonts/Brut_Grotesque-Bold.woff2') format('woff2');
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Brut Grotesque';
+  src:url('../fonts/Brut_Grotesque-Bold_Italic.woff2') format('woff2');
+  font-weight:700;
+  font-style:italic;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Brut Grotesque';
+  src:url('../fonts/Brut_Grotesque-Black.woff2') format('woff2');
+  font-weight:900;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Brut Grotesque';
+  src:url('../fonts/Brut_Grotesque-Black_Italic.woff2') format('woff2');
+  font-weight:900;
+  font-style:italic;
+  font-display:swap;
+}
+
+:root{
+  --travertin: rgb(234,229,228);
+  --ink: #000000;
+  --ink-70: rgba(0,0,0,.72);
+  --ink-45: rgba(0,0,0,.45);
+  --line: rgba(0,0,0,.16);
+  --line-strong: rgba(0,0,0,.35);
+  --white: #ffffff;
+
+  --font-main: 'Brut Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-hand: 'IB Hand', var(--font-main);
+
+  --nav-size: 0.92rem;
+
+  --gap: 1px; /* hairline gallery seam */
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--travertin);
+  color:var(--ink);
+  font-family:var(--font-main);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;margin:0;padding:0;}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;padding:0;}
+
+:focus-visible{
+  outline:2px solid var(--ink);
+  outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+}
+
+.skip-link{
+  position:absolute;left:-9999px;top:0;
+}
+.skip-link:focus{
+  left:1rem;top:1rem;background:var(--white);padding:.5rem 1rem;z-index:999;
+}
+
+/* --------------------------------------------------------------------------
+   PAGE D'ACCUEIL
+   -------------------------------------------------------------------------- */
+.accueil{
+  position:relative;
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+  background:#000;
+  cursor:pointer;
+}
+.accueil video,
+.accueil .accueil-poster{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.accueil-scrim{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0);
+}
+.accueil-logo{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  color:#fff;
+  mix-blend-mode:normal;
+  pointer-events:none;
+  width:clamp(220px, 34vw, 420px);
+}
+.accueil-logo svg{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* --------------------------------------------------------------------------
+   BANDEAU / EN-TÊTE (page principale et pages internes)
+   -------------------------------------------------------------------------- */
+.site-header{
+  position:relative;
+  padding:1.4rem clamp(1rem, 3vw, 2.2rem) 1.1rem;
+  border-bottom:1px solid var(--line);
+}
+.header-grid{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+.brand{
+  order:2;
+  flex:0 0 auto;
+  margin:0 auto;
+  text-align:center;
+}
+.brand a{
+  display:block;
+}
+.brand svg{
+  display:block;
+  height:calc(var(--nav-size) * 3);
+  width:auto;
+}
+
+.nav-primary,
+.nav-secondary{
+  order:1;
+  display:flex;
+  align-items:flex-end;
+  gap:1.4rem;
+  flex-wrap:wrap;
+  flex:1 1 0;
+  min-width:0;
+}
+.nav-primary{ justify-content:flex-start; }
+.nav-secondary{ order:3; justify-content:flex-end; }
+
+.nav-primary a,
+.nav-secondary a,
+.nav-secondary button{
+  font-size:var(--nav-size);
+  line-height:1.1;
+  white-space:nowrap;
+  padding-bottom:.1rem;
+  border-bottom:1px solid transparent;
+}
+.nav-primary a[aria-current="page"],
+.nav-secondary a[aria-current="page"],
+.nav-secondary .is-active{
+  border-bottom-color:var(--ink);
+}
+.nav-primary a:hover,
+.nav-secondary a:hover{
+  border-bottom-color:var(--line-strong);
+}
+
+.nav-toggle{
+  display:none;
+  order:1;
+  font-size:1.2rem;
+  letter-spacing:.15em;
+  padding:.2rem .3rem;
+}
+
+.nav-drawer{
+  display:none;
+}
+.nav-drawer.is-open{
+  display:block;
+  width:100%;
+  order:4;
+  padding-top:1rem;
+}
+.nav-drawer .nav-primary,
+.nav-drawer .nav-secondary{
+  flex-direction:column;
+  align-items:flex-start;
+  gap:.9rem;
+  padding:.4rem 0;
+}
+.nav-drawer .nav-secondary{ align-items:flex-start; border-top:1px solid var(--line); margin-top:.6rem; padding-top:.9rem;}
+
+/* Breakpoint : largeur ~ 2 projets → liens principaux/secondaires passent sous le logo */
+@media (max-width: 900px){
+  .header-grid{ flex-direction:column; align-items:stretch; }
+  .brand{ order:1; margin:0 0 .9rem; text-align:left; }
+  .nav-primary{ order:2; width:100%; justify-content:flex-start; }
+  .nav-secondary{ order:3; width:100%; justify-content:flex-start; margin-top:.7rem; }
+}
+
+/* Breakpoint : largeur ~ 1 projet → menu "···" */
+@media (max-width: 560px){
+  .header-grid{ position:relative; }
+  .brand{ order:1; }
+  .nav-primary,
+  .nav-secondary{ display:none; }
+  .nav-toggle{ display:inline-flex; order:2; position:absolute; top:0; right:0; }
+  .nav-drawer .nav-primary,
+  .nav-drawer .nav-secondary{ display:flex; }
+}
+
+/* --------------------------------------------------------------------------
+   GALERIE PRINCIPALE
+   -------------------------------------------------------------------------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0; /* Supprime l'écart entre les vignettes */
+  background: transparent; /* Supprime la couleur de fond des lignes */
+}
+@media (max-width: 1100px){
+  .gallery{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .gallery{ grid-template-columns:1fr; }
+}
+
+.gallery-item{
+  background:var(--travertin);
+  display:flex;
+  flex-direction:column;
+}
+.gallery-item.is-hidden{ display:none; }
+
+.gallery-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background: var(--travertin); /* ← Fond transparent (couleur du site) */
+  padding: 12.5%; /* cadre vide = 1/8 de la taille de l'image */
+  box-sizing: border-box;
+}
+.gallery-thumb img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;
+}
+.gallery-item a:hover .gallery-thumb img{ transform:scale(1.02); }
+
+.gallery-caption{
+  margin-top:-1.4em; /* remonte la légende dans la marge blanche du cadre */
+  padding:calc(1.4em * 2) 12.5% .9rem; /* texte écarté de l'image de 2 lignes ; 12.5% = cadre de l'image */
+  font-size:.82rem;
+  line-height:1.4;
+}
+.gallery-caption .code{
+  font-family:var(--font-mono);
+  color:var(--ink-45);
+  font-size:.75em; /* 75% de la taille du titre (1em ci-dessous) */
+  display:block;
+}
+.gallery-caption .titre{
+  display:block;
+  font-weight:700;
+  font-size:1em;
+}
+.gallery-caption .moa{ display:block; color:var(--ink-70); }
+
+/* --------------------------------------------------------------------------
+   CONTENU GÉNÉRAL / TYPO
+   -------------------------------------------------------------------------- */
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 clamp(1rem, 3vw, 2.2rem);
+}
+.page-title{
+  font-size:clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight:700;
+  margin:2.6rem 0 1.2rem;
+  max-width:22ch;
+}
+.lede{
+  font-size:1.05rem;
+  line-height:1.6;
+  max-width:62ch;
+  color:var(--ink-70);
+  margin:0 0 2.2rem;
+}
+.section-label{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--ink-45);
+  margin:0 0 .6rem;
+}
+main{ padding-bottom:5rem; }
+
+/* --------------------------------------------------------------------------
+   FICHE PROJET
+   -------------------------------------------------------------------------- */
+.projet-hero{
+  max-width:1200px;
+  margin:0 auto;
+  padding:2.2rem clamp(1rem,3vw,2.2rem) 0;
+}
+.projet-code{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  color:var(--ink-45);
+}
+.projet-titre{
+  font-size:clamp(.9rem, 2vw, 1.5rem); /* deux fois plus petit */
+  font-weight:700;
+  margin:.3rem 0 0;
+  max-width:26ch;
+}
+
+/* Section 1 : photo principale (2/3, marge vide incluse) + tableau de données (1/3) */
+.projet-intro{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  align-items:start;
+  max-width:1200px;
+  margin:2rem auto 0;
+}
+@media (max-width: 900px){
+  /* écran réduit : la photo puis le tableau, en défilement vertical */
+  .projet-intro{ grid-template-columns:1fr; }
+}
+
+.projet-image-principale{
+  padding:0 clamp(1.5rem,4vw,3.5rem) 2rem clamp(1rem,3vw,2.2rem);
+}
+.projet-image-principale img{ width:100%; cursor:zoom-in; }
+
+.projet-donnees{
+  padding:0 clamp(1rem,3vw,2.2rem) 2rem 0;
+}
+@media (max-width: 900px){
+  .projet-donnees{ padding:0 clamp(1rem,3vw,2.2rem) 2rem; }
+}
+
+.donnees-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.92rem;
+}
+.donnees-table tr{ border-top:1px solid var(--line); }
+.donnees-table tr:last-child{ border-bottom:1px solid var(--line); }
+.donnees-table th,
+.donnees-table td{
+  text-align:left;
+  padding:.85rem .4rem;
+  vertical-align:top;
+}
+.donnees-table th{
+  font-weight:400;
+  color:var(--ink-45);
+  width:34%;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.02em;
+}
+
+.projet-texte{
+  max-width:62ch;
+  font-size:1rem;
+  line-height:1.65;
+  margin:2.6rem 0;
+}
+.projet-texte p{ margin:0 0 1.1rem; }
+
+/* Sections 2 et 3 : galerie photos / galerie de documents géométraux —
+   deux colonnes de largeur égale, hauteurs libres (non coordonnées) */
+.planche-contact{
+  column-count:2;
+  column-gap:1.6rem;
+  margin:2.2rem 0;
+}
+@media (max-width: 720px){
+  .planche-contact{ column-count:1; }
+}
+.planche-contact figure{
+  display:flex;
+  align-items:stretch;
+  gap:.8rem;
+  margin:0 0 1.6rem;
+  break-inside:avoid;
+  -webkit-column-break-inside:avoid;
+  page-break-inside:avoid;
+  background:var(--white);
+  padding:1.1rem 1.1rem 1.1rem;
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
+}
+.planche-contact figure img{
+  flex:1 1 auto;
+  width:100%;
+  min-width:0;
+  cursor:zoom-in;
+}
+.planche-contact figcaption{
+  flex:0 0 auto;
+  width:1.6rem;
+  display:flex;
+  flex-direction:row; /* = axe vertical une fois writing-mode appliqué */
+  justify-content:space-between;
+  align-items:center;
+  gap:.8rem;
+  padding:.1rem 0;
+  font-size:.85
+rem;
+  font-family:var(--font-hand);
+  white-space:nowrap;
+  writing-mode:vertical-rl; /* empile le texte verticalement */
+  transform:rotate(180deg); /* + 180° = rotation anti-horaire finale de 90° */
+}
+.planche-contact figcaption .legende{ color:var(--ink-70); }
+
+.doc-list{
+  margin:0 0 3rem;
+}
+.doc-list li{
+  border-top:1px solid var(--line);
+  padding:.9rem .2rem;
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:baseline;
+  font-size:.92rem;
+}
+.doc-list li:last-child{ border-bottom:1px solid var(--line); }
+.doc-list .doc-ref{ font-family:var(--font-mono); font-size:.75rem; color:var(--ink-45); }
+.doc-list a{ border-bottom:1px solid var(--line-strong); }
+.doc-list a:hover{ border-bottom-color:var(--ink); }
+
+/* --------------------------------------------------------------------------
+   PAGE LISTE DES PROJETS
+   -------------------------------------------------------------------------- */
+.liste-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:1.4rem;
+}
+.liste-table thead th{
+  text-align:left;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--ink-45);
+  font-weight:400;
+  padding:.7rem .5rem;
+  border-bottom:1px solid var(--line-strong);
+  cursor:pointer;
+  user-select:none;
+  white-space:nowrap;
+}
+.liste-table thead th .arrow{ opacity:.5; margin-left:.3rem; font-size:.7em; }
+.liste-table tbody tr{
+  border-bottom:1px solid var(--line);
+  transition:font-size .18s ease;
+  cursor:pointer;
+}
+.liste-table tbody tr:hover{
+  background:rgba(0,0,0,.03);
+}
+.liste-table td{
+  padding:.85rem .5rem;
+  font-size:.88rem;
+  vertical-align:middle;
+}
+.liste-table tbody tr:hover td{ padding-top:1.3rem; padding-bottom:1.3rem; }
+.liste-icone{
+  width:46px;
+}
+.liste-icone img{
+  width:44px;height:44px;object-fit:cover;
+}
+
+/* --------------------------------------------------------------------------
+   PAGE AGENCE
+   -------------------------------------------------------------------------- */
+.agence-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:3rem;
+  margin-top:1.5rem;
+}
+@media (max-width: 800px){
+  .agence-grid{ grid-template-columns:1fr; }
+}
+.contact-block{ font-size:.95rem; line-height:1.7; }
+.contact-block h2{
+  font-size:.78rem;
+  font-family:var(--font-mono);
+  color:var(--ink-45);
+  font-weight:400;
+  margin:0 0 .6rem;
+  text-transform:none;
+}
+.contact-block + .contact-block{ margin-top:2rem; }
+.contact-block a{ border-bottom:1px solid var(--line-strong); }
+.contact-block a:hover{ border-bottom-color:var(--ink); }
+.map-frame{
+  width:100%;
+  aspect-ratio:4/3;
+  border:1px solid var(--line);
+  margin-top:1rem;
+}
+
+/* --------------------------------------------------------------------------
+   PAGE AMO
+   -------------------------------------------------------------------------- */
+.amo-liste{
+  margin-top:2.4rem;
+  border-top:1px solid var(--line-strong);
+}
+.amo-liste .row{
+  display:grid;
+  grid-template-columns:9rem 1fr 12rem;
+  gap:1rem;
+  padding:1.1rem .2rem;
+  border-bottom:1px solid var(--line);
+  font-size:.9rem;
+  align-items:baseline;
+}
+@media (max-width: 700px){
+  .amo-liste .row{ grid-template-columns:1fr; gap:.2rem; }
+}
+.amo-liste .row .code{ font-family:var(--font-mono); color:var(--ink-45); font-size:.78rem; }
+.amo-liste .row .moa{ color:var(--ink-70); }
+
+/* --------------------------------------------------------------------------
+   PAGE PUBLICATIONS
+   -------------------------------------------------------------------------- */
+.pub-groupe{ margin-bottom:3.2rem; }
+.pub-groupe h2{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  color:var(--ink-45);
+  font-weight:400;
+  margin:0 0 1rem;
+  border-bottom:1px solid var(--line-strong);
+  padding-bottom:.6rem;
+}
+.pub-item{
+  display:flex;
+  justify-content:space-between;
+  gap:1.5rem;
+  padding:1rem 0;
+  border-bottom:1px solid var(--line);
+  align-items:baseline;
+  font-size:.92rem;
+}
+.pub-item .meta{ color:var(--ink-45); font-size:.82rem; }
+.pub-item a{ border-bottom:1px solid var(--line-strong); }
+.pub-item a:hover{ border-bottom-color:var(--ink); }
+
+/* --------------------------------------------------------------------------
+   VISIONNEUSE PLEIN ÉCRAN (pages projets)
+   -------------------------------------------------------------------------- */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  touch-action:pan-y;
+}
+.lightbox.is-open{ display:flex; }
+.lightbox img{
+  max-width:100vw;
+  max-height:100vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.lightbox-close{
+  position:absolute;
+  top:1.4rem;
+  right:1.6rem;
+  width:2rem;
+  height:2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  opacity:.6;
+  font-size:1.3rem;
+  line-height:1;
+  font-weight:300;
+  transition:opacity .4s ease;
+}
+.lightbox-close:hover{ opacity:1; }
+.lightbox-close.is-hidden{ opacity:0; }
+
+/* --------------------------------------------------------------------------
+   PIED DE PAGE
+   -------------------------------------------------------------------------- */
+.site-footer{
+  border-top:1px solid var(--line);
+  padding:1.6rem clamp(1rem,3vw,2.2rem);
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  font-size:.78rem;
+  color:var(--ink-45);
+}
+.site-footer a{ color:var(--ink-70); border-bottom:1px solid transparent; }
+.site-footer a:hover{ border-bottom-color:var(--ink-45); }
